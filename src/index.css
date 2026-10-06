@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Same brand tokens as the storefront, so both apps look like one product. */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-paper: #f5f7fc;
+  --color-cream: #ebeff9;
+  --color-sand: #dbe2f1;
+  --color-line: #dde3f0;
+  --color-ink: #0e1a3a;
+  --color-muted: #56627f;
+
+  --color-brand: #03369e;
+  --color-brand-dark: #02267a;
+  --color-brand-soft: #e6ecfc;
+  --color-accent: #d94a10;
+  --color-accent-soft: #fff0e5;
+  --color-success: #12805c;
+  --color-warning: #b45309;
+  --color-warning-soft: #fef3e2;
+  --color-success-soft: #dff3ea;
+
+  /* Chart marks: a lighter brand blue validated for contrast and lightness on white. */
+  --color-chart: #2f5fd0;
+}
+
+@layer base {
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role="button"] {
+    cursor: pointer;
+  }
+}
+
+/* Order invoices print without the dashboard chrome. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}
