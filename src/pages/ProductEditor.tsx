@@ -14,7 +14,7 @@ import { useRunWithToast } from '@/hooks/useAppActions'
 import { STOREFRONT_URL } from '@/config/site'
 import { formatNumber, formatPrice, formatShortDate } from '@/lib/format'
 import { PRODUCT_STATUS } from '@/lib/labels'
-import { inputClass, textareaClass } from '@/lib/ui'
+import { controlClass, inputClass, textareaClass } from '@/lib/ui'
 import ColumnChart from '@/components/charts/ColumnChart'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
@@ -52,7 +52,7 @@ function SalesPanel({ product }: { product: Product }) {
         <p className="text-3xl font-semibold">{formatNumber(product.stock)}</p>
         <p className="text-sm text-muted">units in stock · {formatNumber(product.soldCount)} sold</p>
         <div className="mt-4 flex items-center gap-2">
-          <input type="number" min={1} value={change} onChange={(event) => setChange(Math.max(1, Number(event.target.value) || 1))} aria-label="Units to add or remove" className={`${inputClass} w-24`} />
+          <input type="number" min={1} value={change} onChange={(event) => setChange(Math.max(1, Number(event.target.value) || 1))} aria-label="Units to add or remove" className={`${controlClass} w-24`} />
           <Button variant="secondary" size="md" icon={<Plus className="h-4 w-4" />} loading={isLoading} onClick={() => adjust(1)}>
             Add
           </Button>

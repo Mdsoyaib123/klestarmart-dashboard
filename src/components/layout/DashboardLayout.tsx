@@ -17,7 +17,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { baseApi } from '@/api/baseApi'
 import { useLogoutMutation } from '@/features/auth/authApi'
@@ -119,12 +119,9 @@ function UserMenu() {
 export default function DashboardLayout() {
   const user = useAppSelector(selectUser)
   const [menuOpen, setMenuOpen] = useState(false)
-  const { pathname } = useLocation()
   // Shares the overview's cache to show how many orders wait for confirmation.
   const { data: overview } = useGetOverviewQuery(30, { pollingInterval: 60_000 })
   const pending = overview?.pendingOrders ?? 0
-
-  useEffect(() => setMenuOpen(false), [pathname])
 
   const link = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${isActive ? 'bg-brand-soft text-brand' : 'text-muted hover:bg-cream hover:text-ink'}`
@@ -142,7 +139,8 @@ export default function DashboardLayout() {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <nav aria-label="Main" className="flex-1 space-y-6 overflow-y-auto p-3">
+        {/* Choosing a page closes the mobile menu. */}
+        <nav aria-label="Main" onClick={() => setMenuOpen(false)} className="flex-1 space-y-6 overflow-y-auto p-3">
           {sections.map((section) => {
             const items = section.items.filter((item) => !item.adminOnly || user?.role === 'admin')
             if (items.length === 0) return null

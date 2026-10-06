@@ -4,7 +4,7 @@ import { useGetOrdersQuery } from '@/features/orders/ordersApi'
 import { useListParams } from '@/hooks/useListParams'
 import { formatDateTime, formatPrice } from '@/lib/format'
 import { ORDER_STATUS, PAYMENT_STATUS } from '@/lib/labels'
-import { inputClass, tableClass, tableWrapClass, tdClass, thClass } from '@/lib/ui'
+import { filterClass, tableClass, tableWrapClass, tdClass, thClass } from '@/lib/ui'
 import Button from '@/components/ui/Button'
 import PageHeader from '@/components/ui/PageHeader'
 import Pagination from '@/components/ui/Pagination'
@@ -51,8 +51,8 @@ export default function Orders() {
             </option>
           ))}
         </Select>
-        <input type="date" value={values.from} onChange={(event) => set('from', event.target.value)} aria-label="From date" className={`${inputClass} w-auto`} />
-        <input type="date" value={values.to} onChange={(event) => set('to', event.target.value)} aria-label="To date" className={`${inputClass} w-auto`} />
+        <input type="date" value={values.from} onChange={(event) => set('from', event.target.value)} aria-label="From date" className={filterClass} />
+        <input type="date" value={values.to} onChange={(event) => set('to', event.target.value)} aria-label="To date" className={filterClass} />
         {active && (
           <Button variant="ghost" onClick={clear}>
             Clear filters

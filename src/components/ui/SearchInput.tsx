@@ -6,15 +6,19 @@ import { inputClass } from '@/lib/ui'
 // Reports the search term after the user pauses typing.
 export default function SearchInput({ value, onChange, placeholder }: { value: string; onChange: (value: string) => void; placeholder: string }) {
   const [text, setText] = useState(value)
+  const [previous, setPrevious] = useState(value)
   const debounced = useDebounced(text)
+
+  // Follow outside changes, such as "Clear filters" (adjusting state during render, as React recommends).
+  if (value !== previous) {
+    setPrevious(value)
+    setText(value)
+  }
 
   useEffect(() => {
     if (debounced !== value) onChange(debounced)
     // Only react to the debounced text; `value` and `onChange` change on every parent render.
   }, [debounced]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Follow outside changes, such as "Clear filters".
-  useEffect(() => setText(value), [value])
 
   return (
     <label className="relative block w-full sm:w-72">

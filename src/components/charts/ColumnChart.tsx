@@ -64,7 +64,13 @@ export default function ColumnChart({ data, valueLabel, formatValue }: { data: P
                     className="outline-none"
                   />
                   {(index % labelEvery === 0 || index === data.length - 1) && (
-                    <text x={left + band / 2} y={HEIGHT - 8} textAnchor="middle" className="fill-muted text-[11px]">
+                    // The first and last labels align to the plot edges so they are never clipped.
+                    <text
+                      x={index === 0 ? left : index === data.length - 1 ? left + band : left + band / 2}
+                      y={HEIGHT - 8}
+                      textAnchor={index === 0 ? 'start' : index === data.length - 1 ? 'end' : 'middle'}
+                      className="fill-muted text-[11px]"
+                    >
                       {point.label}
                     </text>
                   )}

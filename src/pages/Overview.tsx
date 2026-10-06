@@ -29,7 +29,10 @@ export default function Overview() {
   const [days, setDays] = useState(30)
   const { data, error, refetch, isFetching } = useGetOverviewQuery(days)
 
-  const greeting = new Date().getHours() < 12 ? 'Good morning' : new Date().getHours() < 18 ? 'Good afternoon' : 'Good evening'
+  const [greeting] = useState(() => {
+    const hour = new Date().getHours()
+    return hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+  })
 
   return (
     <>

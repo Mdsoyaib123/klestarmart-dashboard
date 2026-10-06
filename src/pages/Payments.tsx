@@ -4,7 +4,7 @@ import { useGetPaymentsQuery } from '@/features/orders/ordersApi'
 import { useListParams } from '@/hooks/useListParams'
 import { formatDateTime, formatPrice } from '@/lib/format'
 import { PAYMENT_METHOD, PAYMENT_RECORD_STATUS } from '@/lib/labels'
-import { inputClass, tableClass, tableWrapClass, tdClass, thClass } from '@/lib/ui'
+import { filterClass, tableClass, tableWrapClass, tdClass, thClass } from '@/lib/ui'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import PageHeader from '@/components/ui/PageHeader'
@@ -61,8 +61,8 @@ export default function Payments() {
           <option value="pending">Pending</option>
           <option value="failed">Void</option>
         </Select>
-        <input type="date" value={values.from} onChange={(event) => set('from', event.target.value)} aria-label="From date" className={`${inputClass} w-auto`} />
-        <input type="date" value={values.to} onChange={(event) => set('to', event.target.value)} aria-label="To date" className={`${inputClass} w-auto`} />
+        <input type="date" value={values.from} onChange={(event) => set('from', event.target.value)} aria-label="From date" className={filterClass} />
+        <input type="date" value={values.to} onChange={(event) => set('to', event.target.value)} aria-label="To date" className={filterClass} />
         {active && (
           <Button variant="ghost" onClick={clear}>
             Clear filters

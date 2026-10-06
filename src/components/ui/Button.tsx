@@ -1,24 +1,7 @@
 import { Loader2 } from 'lucide-react'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link, type LinkProps } from 'react-router-dom'
-
-type Variant = 'primary' | 'secondary' | 'danger' | 'ghost'
-type Size = 'sm' | 'md'
-
-const variants: Record<Variant, string> = {
-  primary: 'bg-brand text-white hover:bg-brand-dark',
-  secondary: 'border border-line bg-white text-ink hover:border-brand/40 hover:bg-cream/40',
-  danger: 'bg-accent text-white hover:bg-[#b83c0b]',
-  ghost: 'text-muted hover:bg-cream hover:text-ink',
-}
-
-const sizes: Record<Size, string> = {
-  sm: 'h-8 gap-1.5 px-3 text-xs',
-  md: 'h-10 gap-2 px-4 text-sm',
-}
-
-export const buttonClass = (variant: Variant = 'primary', size: Size = 'md') =>
-  `inline-flex shrink-0 items-center justify-center rounded-lg font-medium transition disabled:cursor-not-allowed disabled:opacity-60 ${variants[variant]} ${sizes[size]}`
+import { buttonClass, type ButtonSize as Size, type ButtonVariant as Variant } from '@/lib/ui'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant
